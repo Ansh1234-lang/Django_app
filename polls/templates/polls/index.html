@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %} {%block title%}Polls Index{% endblock%}
+{%block content%}
+<h1>Polls Index</h1>
+{% if page_obj %}
+<ul>
+  {% for question in page_obj %}
+  <li>
+    <a href="{%url 'polls:detail' question.id%}">{{question.question_text}}</a>
+  </li>
+  {% endfor %}
+</ul>
+<div class="pagination">
+  <span class="page_links">
+    {%if page_obj.has_previous%}
+    <a href="?page1">&laquo; first</a>
+    <a href="?page={{page.obj.previous_page_number}}">previous</a>
+    {%endif%}
+
+    <span class="current">
+      page {{page_obj.number}} of {{page_obj.paginator.num_page}}
+    </span>
+
+    {% if page_obj.has_next%}
+    <a href="?page={{page.obj.next_page_number}}">next</a>
+    <a href="?page={{page.obj.paginator.num_number}}"> last</a>
+    {%endif%}
+  </span>
+</div>
+{%else%}
+<p>No polls afe available</p>
+{%endif%} {%endblock%}
