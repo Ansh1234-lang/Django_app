@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', False).lower()==True
-ALLOWED_ORIGINS = ['*']
+ALLOWED_ORIGINS = ["*"]
 
 # ALLOWED_HOSTS = ["http://127.0.0.1:3000"]
 
