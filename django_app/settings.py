@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os 
+from pathlib import Path
 import dj_database_url #type : ignore
 
 from pathlib import Path
@@ -22,10 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-==y@949__!77hpw-fae-y$-ocs$t$tv#vv&^#gck66zja29n82'
+# SECRET_KEY = 'django-insecure-==y@949__!77hpw-fae-y$-ocs$t$tv#vv&^#gck66zja29n82'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', False).lower()==True
+ALLOWED_ORIGINS = ['*']
 
 # ALLOWED_HOSTS = ["http://127.0.0.1:3000"]
 
@@ -88,7 +91,12 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-#DATABASES['default] = dj_database_url.parse('DATA_BASE url)
+
+DATABASES
+
+databaseURL = os.environ.get('DATABASE_URL')
+
+# DATABASES['default'] = dj_database_url.parse('DATA_BASE url')
 DATABASES['default'] = dj_database_url.parse('postgresql://django_db_wg7q_user:xSfb2cod7NVnYww9Kxv3CH3PMKBwHVms@dpg-csaa3iij1k6c73cnekr0-a.singapore-postgres.render.com/django_db_wg7q')
 
 # Password validation
